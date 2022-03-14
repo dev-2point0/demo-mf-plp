@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.json());
 app.use(express.static("dist"));
-app.get("*", (req, res) => {
+app.get("/*", (req, res) => {
     try {
         const html = fs.readFileSync('./dist/index.html', 'utf8');
         res.status(200).send(html);

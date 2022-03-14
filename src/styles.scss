@@ -1,3 +1,31 @@
-.test {
-    color: #f00;
+.mf-host-header {
+    background: #333;
+    padding: 20px;
+    color: #fff;
+    font-size: 40px;
+    text-align: center;
+}
+
+nav {
+    padding: 20px;
+
+    a {
+        background: black;
+        color: #fff;
+        font-size: 14px;
+        display: inline-block;
+        margin-right: 20px;
+        padding: 10px;
+    }
+}
+
+.page-body {
+    padding: 20px;
+}
+
+.host-home,
+.host-about {
+    .heading-text {
+        font-size: 40px;
+    }
 }

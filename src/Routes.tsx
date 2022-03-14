@@ -1,16 +1,25 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
-import App from "./App";
-import Test from "./Test";
+import Home from "./Home";
+import About from "./About";
 
 const appRouting = (
-  <Router>
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/test" element={<Test />} />
-    </Routes>
-  </Router>
+  <div className="mf-host">
+    <div className="mf-host-header">MF Host</div>
+    <Router>
+      <nav>
+        <Link to="/" >Home</Link>
+        <Link to="/about" >About US</Link>
+      </nav>
+      <div className="page-body">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </div>
+    </Router>
+  </div>
 );
 
 export default appRouting;
