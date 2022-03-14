@@ -8,6 +8,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
 const appDir = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDir, relativePath);
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 // const nodeExternals = require('webpack-node-externals');
 
 const isProduction = process.env.NODE_ENV == "production";
@@ -33,6 +34,18 @@ const config = {
     new HtmlWebpackPlugin({
       template: "public/index.html",
     }),
+    new ModuleFederationPlugin(
+      {
+        name: 'MFHost',
+        filename: 'remoteEntry.js',
+        exposes: {
+          AboutHost: './src/About.tsx'
+        },
+        remotes: {
+          
+        }
+      }
+    )
 
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
@@ -75,7 +88,7 @@ module.exports = () => {
     config.plugins.push(new WorkboxWebpackPlugin.GenerateSW());
   } else {
     config.mode = "development";
-    config.devtool ='inline-source-map';
+    config.devtool = 'inline-source-map';
     config.devServer = {
       hot: true,
       open: true
@@ -86,16 +99,13 @@ module.exports = () => {
       "./src/index.ts",
     ];
 
-    config.plugins = [
-      new HtmlWebpackPlugin({
-        template: "public/index.html",
-      }),
+    config.plugins.push(
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoEmitOnErrorsPlugin(),
-  
+
       // Add your plugins here
       // Learn more about plugins from https://webpack.js.org/configuration/plugins/
-    ]
+    )
   }
   return config;
 };
