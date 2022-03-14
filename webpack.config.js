@@ -8,7 +8,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
 const appDir = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDir, relativePath);
-const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+const { ModuleFederationPlugin } = require('webpack').container;
 // const nodeExternals = require('webpack-node-externals');
 
 const isProduction = process.env.NODE_ENV == "production";
@@ -36,10 +36,10 @@ const config = {
     }),
     new ModuleFederationPlugin(
       {
-        name: 'MFHost',
+        name: 'plphost',
         filename: 'remoteEntry.js',
         exposes: {
-          AboutHost: './src/About.tsx'
+          './PLP': './src/PLP/PLP.tsx'
         },
         remotes: {
           
