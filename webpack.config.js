@@ -23,7 +23,7 @@ const config = {
   ],
   output: {
     path: path.resolve(__dirname, "dist"),
-    publicPath: "/"
+    publicPath: "http://localhost:3001/" // important for Module Federation
   },
   // modules: ['node_modules', resolveApp('node_modules')].concat(
   //     process.env.NODE_PATH.split(path.delimiter).filter(Boolean)
@@ -37,12 +37,10 @@ const config = {
     new ModuleFederationPlugin(
       {
         name: 'plphost',
+        library: { type: 'var', name: 'plphost' },
         filename: 'remoteEntry.js',
         exposes: {
           './PLP': './src/PLP/PLP.tsx'
-        },
-        remotes: {
-          
         }
       }
     )
